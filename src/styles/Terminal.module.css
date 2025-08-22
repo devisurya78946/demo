@@ -1,0 +1,105 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  border-left: 1px solid #00ff00;
+  border-right: 1px solid #00ff00;
+  border-bottom: 1px solid #00ff00;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Source Sans Pro', monospace;
+  pointer-events: none;
+  user-select: none;
+}
+
+.output {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #00ff00 #000000;
+  
+}
+
+.output::-webkit-scrollbar {
+  width: 8px;
+}
+
+.output::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.output::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 4px;
+}
+
+.line {
+  margin-bottom: 0.5rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.prompt {
+  color: #00bfff;
+  text-shadow: 0 0 5px #00bfff;
+}
+
+.input {
+  color: #00ff00;
+  text-shadow: 0 0 3px #00ff00;
+}
+
+
+.output_text {
+  color: #ffffff;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background-color: #00ff00;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+  box-shadow: 0 0 3px #00ff00;
+}
+.navigation {
+  background: #000;
+  padding: 20px 20px 0 20px;
+  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* <-- Centers the whole navigation content horizontally */
+}
+
+.navCommands {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem; /* ✅ Add space between nav items */
+  margin-bottom: 5px;
+}
+
+.navUnderline {
+  height: 1px;
+  background: #00c951;
+  width: 100%;
+  max-width: 800px;
+  margin: 5px auto 0;     /* <-- 'auto' left & right centers this underline */
+  position: relative;
+}
+
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}

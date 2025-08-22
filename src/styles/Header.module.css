@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 70px;
+  padding: 8px 15px;
+  background-color: #000;
+  border-bottom: 1px solid #00c951;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.header h1 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #00c951;
+  margin: 0;
+  line-height: 1.2; /* keeps the heading tight */
+}
+
+.header p {
+  font-size: 0.8rem;
+  margin: 2px 0 0 0; /* reduced gap from heading */
+  line-height: 1.2;  /* keeps text compact */
+  color: gray;
+}
