@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styles from '../styles/Terminal.module.css'
+import { runAIQuery } from '../services/aiTerminalService'
 
 const Terminal = () => {
   const [input, setInput] = useState('')
@@ -155,8 +156,10 @@ leadership: `Leadership & Community:
   }
 
   // Process command input
-  const processCommand = (cmd) => {
-    cmd = cmd.trim().toLowerCase()
+  const processCommand = async (cmd) => {
+    const originalCmd = cmd.trim()
+    cmd = originalCmd.toLowerCase()
+    
     if (cmd === "clear") {
       setOutput([])
       setFailedAttempts(0)
@@ -165,24 +168,19 @@ leadership: `Leadership & Community:
       return
     }
 
+    // CASE 1: Direct command match
     if (commandOutputs[cmd]) {
       printCommandWithResponse(cmd, commandOutputs[cmd])
       setFailedAttempts(0)
       setCommandHistory((prev) => [...prev, cmd])
       setHistoryIndex(-1)
     } else if (cmd) {
-      setFailedAttempts((prev) => prev + 1)
-      if (failedAttempts + 1 >= 5) {
-        setOutput([])
-        setFailedAttempts(0)
-        setCommandHistory([])
-        setHistoryIndex(-1)
-        return
-      }
-      printCommandWithResponse(
-        cmd,
-        `bash: ${cmd}: command not found\n\nType 'help' for available commands`
-      )
+      // CASE 2: AI-powered indirect query
+      const aiResponse = await runAIQuery(originalCmd, commandOutputs)
+      printCommandWithResponse(originalCmd, aiResponse)
+      setFailedAttempts(0)
+      setCommandHistory((prev) => [...prev, originalCmd])
+      setHistoryIndex(-1)
     }
   }
 
